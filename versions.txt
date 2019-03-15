@@ -1,0 +1,6 @@
+versão 1.0.0 - ATUAL 
+Descrição:
+
+-Lixeiras com imagens;
+-Scoreboard com os elementos posicionados;
+-Lixos móveis sem imagem;
