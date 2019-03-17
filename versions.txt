@@ -1,6 +1,11 @@
-versão 1.0.0 - ATUAL 
+versão 1.0.0 - ANTERIOR
 Descrição:
 
 -Lixeiras com imagens;
 -Scoreboard com os elementos posicionados;
 -Lixos móveis sem imagem;
+
+versão 1.0.1
+
+-Sistema de array para carregar as imagens dos lixos está
+funcionando;

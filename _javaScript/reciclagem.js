@@ -1,10 +1,36 @@
 let width = window.innerWidth - 1;
 let height = window.innerHeight - 4;
-let images = [];
+
+//objetos
 let trashes = [];
 let cans = [];
-let lixos = [];
+//fim objetos
+
+//imagens
+let canImages = [];
+let metalTrashes = [];
+let paperTrashes = [];
+let plasticTrashes = [];
+let organicTrashes = [];
+let glassTrashes = [];
+
+let trashImages = [];
+//fim imagens
+
+//variáveis de controle
+let qtdMetal = 5;
+let qtdPaper = 2;
+let qtdPlastic = 0;
+let qtdOrganic = 0;
+let qtdGlass = 2;
+let qtdTotal = qtdMetal + qtdPaper + qtdPlastic + qtdOrganic + qtdGlass;
+//fim variáveis de controle
+
+
+
+//fontes
 let boogaloo;
+//fim fontes
 
 let score = 240;
 
@@ -14,19 +40,59 @@ let userLevel = 1;
 //fim variáveis do banco
 
 function preload(){
+    //carrega as imagens das lixeiras
     for(let i = 0; i < 5; i++) {
-        images[i] = loadImage('_images/lixeiras/lixeira' + (i+1) + '.png');
+        canImages[i] = loadImage('_images/lixeiras/lixeira' + (i+1) + '.png');
     }
+//    //carrega as imagens dos lixos
+//    for(let i = 0; i < qtdMetal; i++){
+//       metalTrashes[i] = loadImage('_images/lixos/metal/metal' + (i+1) + '.png');
+//    }
+    
+    let j = 0;
+    let k = 1;
+    let address = ['metal/metal','papel/papel','plastico/plastico','organico/organico','vidro/vidro'];
+    
+    for(let i = 0; i < qtdTotal; i ++){
+        if(k == qtdMetal + 1 && j == 0){
+           j++;
+           k = 1;
+            console.log('j=1');
+        } 
+        if(k == qtdPaper + 1 && j == 1){
+           j++; 
+           k = 1;
+            console.log('j=2');
+        } 
+        if(k == qtdPlastic + 1 && j == 2){
+            j++;
+            k = 1;
+            console.log('j=3');
+        } 
+        if(k == qtdOrganic + 1 && j == 3){
+            j++;
+            k = 1;
+            console.log('j=4');
+        } 
+        if(k == qtdGlass + 1 && j == 4){
+            j = 0;
+            k = 1;
+        }
+        trashImages[i] = loadImage('_images/lixos/' + address[j] + k + '.png');
+        k++;
+    }
+    
+    //carrega a fonte boogaloo
     boogaloo = loadFont('_fonts/Boogaloo-Regular.otf');
 }
 
 function setup() {
   createCanvas(width,height);
-    for(let i = 0; i < 10; i++){
-        trashes[i]= new Trash(random(0, width-height*0.05), random(height*0.5, height-height*0.05), height*0.05);
+    for(let i = 0; i < qtdTotal; i++){
+        trashes[i]= new Trash(random(0, width-height*0.05), random(height*0.5, height-height*0.05), height*0.08, trashImages[i]);
     }
     for(let i = 0; i < 5; i++){
-        cans[i] = new Can(i*width*0.1 + 100, height*0.55-height*0.3, width*0.1, height*0.3, i+1, images[i]);
+        cans[i] = new Can(i*width*0.1 + 100, height*0.55-height*0.3, width*0.1, height*0.3, i+1, canImages[i]);
         //can(x,y,height,width,type,img);
     }
 }

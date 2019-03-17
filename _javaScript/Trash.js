@@ -1,8 +1,8 @@
 class Trash {
-    constructor(x, y, size, type){
+    constructor(x, y, size, img){
         this.x = x;
         this.y = y;
-        this.img;
+        this.img = img;
         this.size = size;
         this.type;
         this.held = false;
@@ -21,9 +21,10 @@ class Trash {
     }
     
     show(){
-        fill(255);
-        noStroke();
-        rect(this.x, this.y, this.size, this.size)
+//        fill(255);
+//        noStroke();
+//        rect(this.x, this.y, this.size, this.size)
+        image(this.img, this.x, this.y, this.size, this.size);
     }
     
     click(){
