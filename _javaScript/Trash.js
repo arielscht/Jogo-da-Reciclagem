@@ -34,7 +34,11 @@ class Trash {
     }
     
     move(){
-        this.x = mouseX - this.size/2;
-        this.y = mouseY - this.size/2;
+        if(mouseX > this.size/2 && mouseX < width-this.size/2){
+            this.x = mouseX - this.size/2;
+        }
+        if(mouseY <= height-this.size/2 && mouseY > this.size/2) {
+            this.y = mouseY - this.size/2;
+        }
     }
 }

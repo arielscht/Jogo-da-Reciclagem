@@ -20,10 +20,12 @@ let trashImages = [];
 //variáveis de controle
 let qtdMetal = 5;
 let qtdPaper = 2;
-let qtdPlastic = 0;
-let qtdOrganic = 0;
+let qtdPlastic = 2;
+let qtdOrganic = 1;
 let qtdGlass = 2;
 let qtdTotal = qtdMetal + qtdPaper + qtdPlastic + qtdOrganic + qtdGlass;
+
+let heldTrash;
 //fim variáveis de controle
 
 
@@ -38,6 +40,7 @@ let score = 240;
 let username = 'arielsch';
 let userLevel = 1;
 //fim variáveis do banco
+let sizeArray = [];
 
 function preload(){
     //carrega as imagens das lixeiras
@@ -80,19 +83,24 @@ function preload(){
         }
         trashImages[i] = loadImage('_images/lixos/' + address[j] + k + '.png');
         k++;
+        sizeArray.push(j);
     }
     
     //carrega a fonte boogaloo
     boogaloo = loadFont('_fonts/Boogaloo-Regular.otf');
 }
 
+let counterSize = 0;
+let trashSize = [0.08,0.12,0.08,0.1,0.12];
+            //metal, paper, plastic, organic, glass
+
 function setup() {
   createCanvas(width,height);
     for(let i = 0; i < qtdTotal; i++){
-        trashes[i]= new Trash(random(0, width-height*0.05), random(height*0.5, height-height*0.05), height*0.08, trashImages[i]);
+        trashes[i]= new Trash(random(0, width-height*trashSize[sizeArray[i]]), random(height*0.5, height-height*trashSize[sizeArray[i]]), height*trashSize[sizeArray[i]], trashImages[i]);
     }
     for(let i = 0; i < 5; i++){
-        cans[i] = new Can(i*width*0.1 + 100, height*0.55-height*0.3, width*0.1, height*0.3, i+1, canImages[i]);
+        cans[i] = new Can(i*width*0.1 + 100, height*0.55-height*0.3, height*0.3, width*0.1, i+1, canImages[i]);
         //can(x,y,height,width,type,img);
     }
 }
@@ -134,9 +142,10 @@ function draw() {
 }
 
 function mousePressed(){
-    for(let trash of trashes){
-       if(trash.click()){
-           trash.setHeld(true);
+    for(let i = 0; i< qtdTotal; i++){
+       if(trashes[i].click()){
+           trashes[i].setHeld(true);
+           heldTrash = i;
            break;
        } 
     }
@@ -145,9 +154,17 @@ function mousePressed(){
 
 //////possível otimização/////// ==== armazenar o indíce do objeto que está sendo arrastado para assim desativar o movimento somente deste único objeto e n de todo o array
 function mouseReleased(){
-    for(let trash of trashes){
-        trash.setHeld(false); 
+    for(let i = 0; i < 5; i++){
+            if((trashes[heldTrash].x > cans[i].x && trashes[heldTrash].x < cans[i].x + cans[i].width)&&(trashes[heldTrash].y > cans[i].y && trashes[heldTrash].y < cans[i].y + cans[i].height/2)){
+                console.log('inside');
+                trashes.splice(heldTrash,1);
+            } else {
+                trashes[heldTrash].setHeld(false); 
+            } 
     }
+//    for(let trash of trashes){
+//        trash.setHeld(false); 
+//    }
 }
 ////fim possível otimização/////
 

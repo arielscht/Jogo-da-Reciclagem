@@ -1,11 +1,21 @@
-versão 1.0.0 - ANTERIOR
+versão 1.0.0 
+Released: 15/03/2019
 Descrição:
 
 -Lixeiras com imagens;
 -Scoreboard com os elementos posicionados;
 -Lixos móveis sem imagem;
 
-versão 1.0.1
+versão 1.0.1 
+Released: 17/03/2019
 
 -Sistema de array para carregar as imagens dos lixos está
 funcionando;
+
+versão 1.0.2 - ATUAL
+Released: 24/03/2019
+
+-Sistema de tamanho único para cada categoria de lixo;
+-Posicionamento aleatório corrigido, nenhum lixo 'nasce' com alguma parte para fora da tela;
+-Consertada a movimentação dos lixos, não sendo mais possível mover o lixo para fora do mapa;
+-Sistema de colocar o lixo na lixeira está funcionando, porém sem nenhuma restrição, pode-se colocar em qualquer lixeira;

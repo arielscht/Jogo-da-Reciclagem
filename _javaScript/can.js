@@ -9,13 +9,24 @@ class Can{
         this.img = img;
     }
     
+    getWidth(){
+        return this.width;
+    }
+    
+    getHeight(){
+        return this.heith;
+    }
+    
+    getType(){
+        return this.type;
+    }
+    
+    
     show(){
 //        fill(this.color);
 //        rect(this.x, this.y, this.height, this.width);
-        image(this.img, this.x, this.y, this.height, this.width);
+        image(this.img, this.x, this.y, this.width, this.height);
     }
     
-    type(){
-        return this.type;
-    }
+    
 }
