@@ -19,3 +19,16 @@ Released: 24/03/2019
 -Posicionamento aleatório corrigido, nenhum lixo 'nasce' com alguma parte para fora da tela;
 -Consertada a movimentação dos lixos, não sendo mais possível mover o lixo para fora do mapa;
 -Sistema de colocar o lixo na lixeira está funcionando, porém sem nenhuma restrição, pode-se colocar em qualquer lixeira;
+
+versão 1.0.3
+Released: DD/MM/AAAA
+
+- Lixos e lixeiras estão recebendo tipos numéricos correspondentes;
+- Cada lixo colocado na lixeira correta, recebe 10 pontos;
+- Cada lixo colocado na liceira incorreta, perde-se 5 pontos;
+- O lixo não se move para cima do placar;
+- Ao soltar o lixo no céu ele retorna a sua posição inicial, ao soltar no chão ele continua na posição em que foi solto;
+- Implementado um Timer;
+- Ao iniciar o jogo, um modal abre perguntado o tempo para o jogo, podendo selecionar o modo de treino sem tempo.
+- Ao acabar o tempo, um modal abre, o qual mostra a sua pontuação, podendo optar por sair do jogo ou jogar novamente.
+- Cursor do mouse é uma mãozinha;

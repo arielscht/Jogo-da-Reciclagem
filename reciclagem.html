@@ -4,13 +4,82 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.min.js"></script>
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
     <link rel="stylesheet" type="text/css" href="_css/normalize.css">
     <meta charset="utf-8" />
 
+    <style>
+        canvas{
+            cursor: url('_images/hand-cursor-open.cur'), auto;
+        }  
+    </style>
+
+
   </head>
   <body>
+
+<!-- Modal Inicio do jogo -->
+<div class="modal fade" id="inicioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">ESCOLHA SEU TEMPO</h5>
+        
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+           
+            <select class="form-control" id="timeSelect" style='font-size: 25px;'>
+              <option value="0">&infin; (treino)</option>
+              <option value="1">10s</option>
+              <option value="2">30s</option>
+              <option value="3">1m</option>
+              <option value="4">1m30s</option>
+              <option value="5">2m</option>
+            </select> 
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal" id='btnStart'>Iniciar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Sair do jogo</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Fim do jogo -->
+<div class="modal fade" id="resultadoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">RESULTADO</h5>
+        
+      </div>
+      <div class="modal-body">
+        <label for="scoreField" style='font-size: 30px;'>Sua pontuação:</label>
+        <input id='scoreField' type="number" style='width:30%;border-radius:5px;border:0px;text-align:center;font-size:30px;padding:0;margin-left:10px;font-weight:600;color:black;' disabled>
+        <label for="newPositionField" style='font-size: 30px;'>Ranking:</label>
+        <input id='newPositionField' type="number" style='width:30%;border-radius:5px;border:0px;text-align:center;font-size:30px;padding:0;margin-left:10px;font-weight:600;color:black;' disabled>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Ranking</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal" id="btnTryAgain">Tentar Novamente</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Sair do jogo</button>
+      </div>
+    </div>
+  </div>
+</div>
+   
     <script src="_javaScript/reciclagem.js"></script>
     <script src="_javaScript/Trash.js"></script>
     <script src="_javaScript/can.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+   
   </body>
 </html>
