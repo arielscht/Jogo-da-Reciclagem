@@ -2,7 +2,7 @@
 <html>
   <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.min.js"></script>
     
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -11,9 +11,20 @@
     <meta charset="utf-8" />
 
     <style>
-        canvas{
+        /* canvas{
             cursor: url('_images/hand-cursor-open.cur'), auto;
-        }  
+        }   */
+        .slider {
+            -webkit-appearance: none;
+            width: 50%;
+            height: 15px;
+            border-radius: 5px;  
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
     </style>
 
 
@@ -21,7 +32,7 @@
   <body>
 
 <!-- Modal Inicio do jogo -->
-<div class="modal fade" id="inicioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+<div class="modal" id="inicioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -40,6 +51,8 @@
               <option value="5">2m</option>
             </select> 
         </div>
+        <img src='_images/speaker2.png' id='imgSpeaker'/>
+        <input type='range' min='0' max='100' value='50' step='1' id='volumeSlider' class='slider'>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-success" data-dismiss="modal" id='btnStart'>Iniciar</button>
@@ -48,7 +61,6 @@
     </div>
   </div>
 </div>
-
 
 <!-- Modal Fim do jogo -->
 <div class="modal fade" id="resultadoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
@@ -73,13 +85,16 @@
   </div>
 </div>
    
-    <script src="_javaScript/reciclagem.js"></script>
+    
     <script src="_javaScript/Trash.js"></script>
     <script src="_javaScript/can.js"></script>
+    <script src="_javaScript/score.js"></script>
+    <script src="_javaScript/reciclagem.js"></script>
+
     
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
    
-  </body>
+</body>
 </html>

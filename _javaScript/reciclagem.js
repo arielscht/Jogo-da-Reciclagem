@@ -1,5 +1,5 @@
-let width = window.innerWidth - 1;
-let height = window.innerHeight - 4;
+let width = window.innerWidth - 5;
+let height = window.innerHeight - 5;
 
 //objetos
 let trashes = [];
@@ -38,21 +38,36 @@ let second = 0;
 let currentTime;
 let timerOn = false;
 
+//Initial Time
+let initialTimer = 3;
+let initialCurrentTimer;
+
+//Score object
+let scores = [];
+
+//Score variables
+let score = 0;
+let scored = false;
+
+
 //elementos dos modais
 let scoreField = document.getElementById("scoreField");
 let btnTryAgain = document.getElementById("btnTryAgain");
 let timeSelect = document.getElementById("timeSelect");
 let btnStart = document.getElementById("btnStart");
 
+let volumeSlider = document.getElementById("volumeSlider");
+let imgSpeaker = document.getElementById("imgSpeaker");
+let lastVolume;
+
+//input Score do placar
+let inputScore = document.getElementById("score");
+
 //fim variáveis de controle
 
 //fontes
 let boogaloo;
 //fim fontes
-let ground;
-
-
-let score = 0;
 
 //variáveis do banco
 let username = 'arielsch';
@@ -60,7 +75,31 @@ let userLevel = 1;
 //fim variáveis do banco
 let sizeArray = [];
 
+//sound variables
+let Smetal;
+let Spaper;
+let Splastic;
+let Sorganic;
+let Sglass;
+let SgameOver;
+let Smisplaced;
+let music;
+
+
 function preload(){
+    //load sounds
+    Sglass = loadSound('_sounds/effects/glass.wav');
+    Smetal = loadSound('_sounds/effects/metal.wav');
+    Splastic = loadSound('_sounds/effects/plastic.wav');
+    Spaper = loadSound('_sounds/effects/paper.mp3');
+    Sorganic = loadSound('_sounds/effects/organic.wav');
+    Smisplaced = loadSound('_sounds/misplaced2.mp3');
+    SgameOver = loadSound('_sounds/gameover.mp3');
+    music = loadSound('_sounds/musics/music.mp3');
+
+    //fim load sounds
+
+
     //carrega as imagens das lixeiras
     for(let i = 0; i < 5; i++) {
         canImages[i] = loadImage('_images/lixeiras/lixeira' + (i+1) + '.png');
@@ -113,8 +152,12 @@ let counterSize = 0;
 let trashSize = [0.08,0.12,0.08,0.1,0.12];
             //metal, paper, plastic, organic, glass
 
+let restarted = false;
+
 function setup() {
-  createCanvas(width,height);
+    if(!restarted){
+        createCanvas(width,height);
+    }
     for(let i = 0; i < qtdTotal; i++){
         trashes[i]= new Trash(random(0, width-height*trashSize[sizeArray[i]]), random(height*0.5, height-height*trashSize[sizeArray[i]]), height*trashSize[sizeArray[i]], trashImages[i], sizeArray[i]);
     }
@@ -122,13 +165,33 @@ function setup() {
         cans[i] = new Can(i*width*0.1 + 100, height*0.55-height*0.3, height*0.3, width*0.1, i, canImages[i]);
         //can(x,y,height,width,type,img);
     }
-    
+    console.log(floor(millis()) + 'milliseconds');
+
+    music.play();
+    music.setVolume(0.1)
+
+    volumeSlider.value = 50;
+
     noLoop();
+    $('#placar').css('visibility','visible');
     $('#inicioModal').modal('show');
 }
 
+function setMusicVolume(){
+    if(volumeSlider.value == 0){
+        imgSpeaker.src = '_images/speaker0.png';
+    } else if(volumeSlider.value > 0 && volumeSlider.value <= 40){
+        imgSpeaker.src = '_images/speaker1.png';
+    } else if(volumeSlider.value > 40 && volumeSlider.value < 80){
+        imgSpeaker.src = '_images/speaker2.png';
+    } else {
+        imgSpeaker.src = '_images/speaker3.png';
+    }
+    music.setVolume(map(volumeSlider.value,0,100,0,0.1));
+}
+
 function draw() {
-//Time setting
+//Timer setting
     if(timerOn){
         if((millis()-currentTime) >= 1000){
             if(second > 0){
@@ -139,6 +202,9 @@ function draw() {
             }
             currentTime = millis();
             if(minute == 0 && second == 0){
+                music.stop();
+                SgameOver.setVolume(0.05);
+                SgameOver.play();
                 $("#resultadoModal").modal("show");
                 scoreField.value = score;
                 timerOn = false;
@@ -146,8 +212,21 @@ function draw() {
             }
         }
     }
-//fim time setting
+//fim timer setting
     
+//Initial timer setting
+    if(timeSelect.value != 0){
+        if(initialTimer > 0){
+            if((millis()-initialCurrentTimer) >= 1000){
+                initialTimer--
+                initialCurrentTimer = millis();
+            }
+        } else {
+            timerOn = true;
+        }
+    }
+//Fim initial timer setting
+
   background('#81d8d0');
 //Timer
     noStroke();
@@ -157,6 +236,7 @@ function draw() {
     text(nf(minute,2) + ":" + nf(second,2), width*0.01,width*0.04);
     stroke(0);
 //fim Timer
+    
     
 //scoreboard
   fill(255);
@@ -181,6 +261,17 @@ function draw() {
   rect(0, height*0.5, width,height*0.5);
     //image(ground, 0, height*0.5, width, height*0.5);
 //fim chão
+    
+    //
+    for(let i = 0; i < scores.length; i++){
+        scores[i].show();
+        if(scores[i].getAlpha() == 0){
+            scores.splice(i,1);
+        }
+    }    
+    //
+    
+    
     //desenha as latas de lixo
     for(let can of cans){
         can.show();
@@ -192,6 +283,20 @@ function draw() {
     }
     //fim lixos
     
+    //Timer inicial
+    if(initialTimer > 0){
+        noStroke();
+        fill('rgba(0,0,0, 0.9)');
+        rect(width*0.45, height/2-height*0.3/2, width*0.1, height*0.3, 20, 20, 20, 20);
+        fill(255);
+        textSize(height*0.35);
+        text(initialTimer, width*0.455, height/2+height*0.11);
+        stroke(0);
+    }
+    //Timer Inicial
+    
+    
+    
     //abre a aba de resultados se não tiver mais lixos
     if(trashes.length == 0){
         $("#resultadoModal").modal("show");
@@ -201,14 +306,14 @@ function draw() {
 }
 
 function mousePressed(){
-    
-    for(let i = 0; i< qtdTotal; i++){
+    for(let i = 0; i< trashes.length; i++){
        if(trashes[i].click()){
            trashes[i].setHeld(true);
            heldTrash = i;
            initialX = trashes[heldTrash].x;
            initialY = trashes[heldTrash].y;
-           document.getElementsByTagName('canvas')[0].style.cursor = "url('_images/hand-cursor-closed.cur'), auto";
+           //document.getElementsByTagName('canvas')[0].style.cursor = "url('_images/hand-cursor-closed.cur'), auto";
+           cursor('_images/hand-cursor-closed.cur');
            break;
        } 
     }
@@ -217,18 +322,49 @@ function mousePressed(){
 
 //////possível otimização/////// ==== armazenar o indíce do objeto que está sendo arrastado para assim desativar o movimento somente deste único objeto e n de todo o array
 function mouseReleased(){
-    for(let i = 0; i < 5; i++){
-            if((trashes[heldTrash].x > cans[i].x && trashes[heldTrash].x < cans[i].x + cans[i].width)&&(trashes[heldTrash].y > cans[i].y && trashes[heldTrash].y < cans[i].y + cans[i].height)){
+    if(heldTrash != null){
+        for(let i = 0; i < 5; i++){
+            if((trashes[heldTrash].x+trashes[heldTrash].getSize()/2 > cans[i].x && trashes[heldTrash].x+trashes[heldTrash].getSize()/2 < cans[i].x + cans[i].width)&&(trashes[heldTrash].y+trashes[heldTrash].getSize()/2 > cans[i].y && trashes[heldTrash].y+trashes[heldTrash].getSize()/2 < cans[i].y + cans[i].height)){
                 console.log('inside');
+                let objectScore = new Score(cans[i].x + cans[i].getWidth()/3, cans[i].y + cans[i].getHeight()/6, millis());
+                    
                 if(trashes[heldTrash].getType() == cans[i].getType()){
                     score += 10;
-                    console.log(score);
+                    objectScore.setScore('+10');
+                    objectScore.setX(cans[i].x + cans[i].getWidth()/4.5);
+                    console.log('inside2');
                 } else {
+                    Smisplaced.setVolume(0.2);
+                    Smisplaced.play();
                     score -= 5;
+                    console.log('outside')
+                    objectScore.setScore('-5');
                 }
+
+                switch(trashes[heldTrash].getType()){
+                    case 0:
+                        Smetal.play();
+                        break;
+                    case 1:
+                        Spaper.play();
+                        break;
+                    case 2:
+                        Splastic.play();
+                        break;
+                    case 3:
+                        Sorganic.play();
+                        break;
+                    case 4:
+                        Sglass.play();
+                        break;
+                }
+                    
                 trashes.splice(heldTrash,1);
-                break;
+                    
+                scores.push(objectScore);
+                    
                 console.log('entrou if check inside');
+                break;
             } 
             if(i == 4) {
                 if(trashes[heldTrash].y < height*0.5){
@@ -242,18 +378,21 @@ function mouseReleased(){
                     console.log('entrou else 2');
                 }
             }
+        }
+        heldTrash = null;
     }
 //    for(let trash of trashes){
 //        trash.setHeld(false); 
 //    }
-    document.getElementsByTagName('canvas')[0].style.cursor = "url('_images/hand-cursor-open.cur'), auto";
+    //document.getElementsByTagName('canvas')[0].style.cursor = "url('_images/hand-cursor-open.cur'), auto";
+    cursor('_images/hand-cursor-open.cur');
 }
 ////fim possível otimização/////
 
 
 function mouseDragged(){
     for(let trash of trashes){
-        if(trash.getHeld()){
+        if(trash.getHeld() && initialTimer == 0){
             trash.move();
         }
     }
@@ -261,11 +400,25 @@ function mouseDragged(){
 }
 
 function tryAgain(){
-    window.location.reload();
+    //window.location.reload();
+}
+
+function restart(){
+    score = 0;
+    music.stop();
+    timerOn = false;
+    trashes = [];
+    scores = [];
+    restarted = true;
+    initialTimer = 3;
+    timeSelect.value = 0;
+    draw();
+    setup();
 }
 
 function startGame(){
-    timerOn = true;
+    //document.getElementsByTagName('canvas')[0].style.cursor = "url('_images/hand-cursor-open.cur'), auto";
+    cursor('_images/hand-cursor-open.cur');
     switch (timeSelect.value){
         case '0':
             minute = 0;
@@ -293,9 +446,27 @@ function startGame(){
             second = 0;
     }
     currentTime = millis();
+    initialCurrentTimer = millis();
     loop();
+    if(timeSelect.value == 0){
+        initialTimer = 0;
+    }
+    console.log('music played');
 }
 
-btnTryAgain.addEventListener('click', tryAgain);
+btnTryAgain.addEventListener('click', restart);
 btnStart.addEventListener('click', startGame);
+volumeSlider.addEventListener('input', setMusicVolume);
+
+
+imgSpeaker.addEventListener('click', function(){
+    if(volumeSlider.value > 0) {
+        lastVolume = volumeSlider.value;
+        volumeSlider.value = 0;
+        setMusicVolume();
+    } else {
+        volumeSlider.value = lastVolume;
+        setMusicVolume();
+    }
+});
 

@@ -14,7 +14,7 @@ class Can{
     }
     
     getHeight(){
-        return this.heith;
+        return this.height;
     }
     
     getType(){
