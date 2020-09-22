@@ -19,7 +19,7 @@ Ao iniciar o jogo, o objetivo é colocar os lixos espalhados pelo chão em suas 
 
 # Recycling Game
  
-Game developed as a project for my final paper at Federal Institute Catarinense.
+Game developed as a project for my final paper of IT at Federal Institute Catarinense.
 
 ### Initial Page
 
