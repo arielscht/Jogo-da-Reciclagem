@@ -85,68 +85,9 @@ let SgameOver;
 let Smisplaced;
 let music;
 
-
-function preload(){
-    //load sounds
-    Sglass = loadSound('_sounds/effects/glass.wav');
-    Smetal = loadSound('_sounds/effects/metal.wav');
-    Splastic = loadSound('_sounds/effects/plastic.wav');
-    Spaper = loadSound('_sounds/effects/paper.mp3');
-    Sorganic = loadSound('_sounds/effects/organic.wav');
-    Smisplaced = loadSound('_sounds/misplaced2.mp3');
-    SgameOver = loadSound('_sounds/gameover.mp3');
-    music = loadSound('_sounds/musics/music.mp3');
-
-    //fim load sounds
-
-
-    //carrega as imagens das lixeiras
-    for(let i = 0; i < 5; i++) {
-        canImages[i] = loadImage('_images/lixeiras/lixeira' + (i+1) + '.png');
-    }
-//    //carrega as imagens dos lixos
-//    for(let i = 0; i < qtdMetal; i++){
-//       metalTrashes[i] = loadImage('_images/lixos/metal/metal' + (i+1) + '.png');
-//    }
-    
-    let j = 0;
-    let k = 1;
-    let address = ['metal/metal','papel/papel','plastico/plastico','organico/organico','vidro/vidro'];
-    
-    for(let i = 0; i < qtdTotal; i ++){
-        if(k == qtdMetal + 1 && j == 0){
-           j++;
-           k = 1;
-            console.log('j=1');
-        } 
-        if(k == qtdPaper + 1 && j == 1){
-           j++; 
-           k = 1;
-            console.log('j=2');
-        } 
-        if(k == qtdPlastic + 1 && j == 2){
-            j++;
-            k = 1;
-            console.log('j=3');
-        } 
-        if(k == qtdOrganic + 1 && j == 3){
-            j++;
-            k = 1;
-            console.log('j=4');
-        } 
-        if(k == qtdGlass + 1 && j == 4){
-            j = 0;
-            k = 1;
-        }
-        trashImages[i] = loadImage('_images/lixos/' + address[j] + k + '.png');
-        k++;
-        sizeArray.push(j);
-    }
-    
-    //carrega a fonte boogaloo
-    boogaloo = loadFont('_fonts/Boogaloo-Regular.otf');
-    //ground = loadImage('_images/ground.jpg')
-}
+//LOADING
+let loading = true;
+let loaded = 0;
 
 let counterSize = 0;
 let trashSize = [0.08,0.12,0.08,0.1,0.12];
@@ -158,23 +99,78 @@ function setup() {
     if(!restarted){
         createCanvas(width,height);
     }
-    for(let i = 0; i < qtdTotal; i++){
-        trashes[i]= new Trash(random(0, width-height*trashSize[sizeArray[i]]), random(height*0.5, height-height*trashSize[sizeArray[i]]), height*trashSize[sizeArray[i]], trashImages[i], sizeArray[i]);
+
+    if(loading){
+    //=====================LOAD ELEMENTS======================
+    Sglass = loadSound('_sounds/effects/glass.wav',loadElement);
+    Smetal = loadSound('_sounds/effects/metal.wav',loadElement);
+    Splastic = loadSound('_sounds/effects/plastic.wav',loadElement);
+    Spaper = loadSound('_sounds/effects/paper.mp3',loadElement);
+    Sorganic = loadSound('_sounds/effects/organic.wav',loadElement);
+    Smisplaced = loadSound('_sounds/misplaced2.mp3',loadElement);
+    SgameOver = loadSound('_sounds/gameover.mp3',loadElement);
+    music = loadSound('_sounds/musics/music.mp3',loadElement);
+
+    //carrega as imagens das lixeiras
+    for(let i = 0; i < 5; i++) {
+        canImages[i] = loadImage('_images/lixeiras/lixeira' + (i+1) + '.png',loadElement);
     }
-    for(let i = 0; i < 5; i++){
-        cans[i] = new Can(i*width*0.1 + 100, height*0.55-height*0.3, height*0.3, width*0.1, i, canImages[i]);
-        //can(x,y,height,width,type,img);
+
+    let j = 0;
+    let k = 1;
+    let address = ['metal/metal','papel/papel','plastico/plastico','organico/organico','vidro/vidro'];
+
+    for(let i = 0; i < qtdTotal; i ++){
+        if(k == qtdMetal + 1 && j == 0){
+           j++;
+           k = 1;
+        } 
+        if(k == qtdPaper + 1 && j == 1){
+           j++; 
+           k = 1;
+        } 
+        if(k == qtdPlastic + 1 && j == 2){
+            j++;
+            k = 1;
+        } 
+        if(k == qtdOrganic + 1 && j == 3){
+            j++;
+            k = 1;
+        } 
+        if(k == qtdGlass + 1 && j == 4){
+            j = 0;
+            k = 1;
+        }
+        trashImages[i] = loadImage('_images/lixos/' + address[j] + k + '.png', loadElement);
+        k++;
+        sizeArray.push(j);
     }
-    console.log(floor(millis()) + 'milliseconds');
 
-    music.play();
-    music.setVolume(0.1)
+    boogaloo = loadFont('_fonts/Boogaloo-Regular.ttf', loadElement);
 
-    volumeSlider.value = 50;
+    //====================END OF LOAD ELEMENTS=========================
+    }
+    if(!loading){ //ADDED
+        for(let i = 0; i < qtdTotal; i++){
+            trashes[i]= new Trash(random(0, width-height*trashSize[sizeArray[i]]), random(height*0.5, height-height*trashSize[sizeArray[i]]), height*trashSize[sizeArray[i]], trashImages[i], sizeArray[i]);
+        }
+        for(let i = 0; i < 5; i++){
+            cans[i] = new Can(i*width*0.1 + 100, height*0.55-height*0.3, height*0.3, width*0.1, i, canImages[i]);
+        }
 
-    noLoop();
-    $('#placar').css('visibility','visible');
-    $('#inicioModal').modal('show');
+        music.play();
+        music.setVolume(0.1)
+
+        volumeSlider.value = 50;
+
+        noLoop();
+        $('#placar').css('visibility','visible');
+        $('#inicioModal').modal('show');
+    } //ADDED
+}
+
+function loadElement(element){
+    loaded += 1;
 }
 
 function setMusicVolume(){
@@ -190,7 +186,46 @@ function setMusicVolume(){
     music.setVolume(map(volumeSlider.value,0,100,0,0.1));
 }
 
+let barLength = 0;
+
 function draw() {
+
+//Loading bar
+if(loading){
+    background('#8cce53');
+
+    noFill();
+    strokeWeight(4);
+    stroke(255);
+    rect(width*0.2, height*0.45, width*0.6, height*0.05,width*height/1000);
+    noStroke();
+    fill(255);
+
+    textSize(width*height/30000);
+    text('Carregando...', width*0.42, height*0.6);
+
+    if(barLength < width*0.595/(qtdTotal+14)*loaded) {
+        barLength += 5;
+    }
+
+    rect(width*0.202, height*0.455, barLength, height*0.04, width*height/1000);
+    
+    if(barLength >= width*0.595){
+        loading = false;
+        setup();
+    }
+}
+
+
+if(!loading){ //ADDED
+background('#81d8d0');
+//desenho do chão
+fill('#8dce55');
+stroke('#0B5345');
+strokeWeight(1);
+rect(0, height*0.5, width,height*0.5);
+//fim chão
+
 //Timer setting
     if(timerOn){
         if((millis()-currentTime) >= 1000){
@@ -227,7 +262,7 @@ function draw() {
     }
 //Fim initial timer setting
 
-  background('#81d8d0');
+ 
 //Timer
     noStroke();
     fill(255);
@@ -254,13 +289,6 @@ function draw() {
   text('Pontuação: ', width-width*0.18, height*0.15);
   text(score, width-width*0.10, height*0.15);
 //fim scoreboard
-    
-//desenho do chão
-  fill('#8dce55');
-  stroke('#0B5345');
-  rect(0, height*0.5, width,height*0.5);
-    //image(ground, 0, height*0.5, width, height*0.5);
-//fim chão
     
     //
     for(let i = 0; i < scores.length; i++){
@@ -304,6 +332,7 @@ function draw() {
         timerOn = false;
     }
 }
+}
 
 function mousePressed(){
     for(let i = 0; i< trashes.length; i++){
@@ -312,7 +341,6 @@ function mousePressed(){
            heldTrash = i;
            initialX = trashes[heldTrash].x;
            initialY = trashes[heldTrash].y;
-           //document.getElementsByTagName('canvas')[0].style.cursor = "url('_images/hand-cursor-closed.cur'), auto";
            cursor('_images/hand-cursor-closed.cur');
            break;
        } 
@@ -320,25 +348,30 @@ function mousePressed(){
 }
 
 
-//////possível otimização/////// ==== armazenar o indíce do objeto que está sendo arrastado para assim desativar o movimento somente deste único objeto e n de todo o array
 function mouseReleased(){
     if(heldTrash != null){
         for(let i = 0; i < 5; i++){
             if((trashes[heldTrash].x+trashes[heldTrash].getSize()/2 > cans[i].x && trashes[heldTrash].x+trashes[heldTrash].getSize()/2 < cans[i].x + cans[i].width)&&(trashes[heldTrash].y+trashes[heldTrash].getSize()/2 > cans[i].y && trashes[heldTrash].y+trashes[heldTrash].getSize()/2 < cans[i].y + cans[i].height)){
-                console.log('inside');
                 let objectScore = new Score(cans[i].x + cans[i].getWidth()/3, cans[i].y + cans[i].getHeight()/6, millis());
                     
                 if(trashes[heldTrash].getType() == cans[i].getType()){
                     score += 10;
                     objectScore.setScore('+10');
                     objectScore.setX(cans[i].x + cans[i].getWidth()/4.5);
-                    console.log('inside2');
                 } else {
                     Smisplaced.setVolume(0.2);
                     Smisplaced.play();
                     score -= 5;
-                    console.log('outside')
-                    objectScore.setScore('-5');
+                    if(score > 0){
+                        objectScore.setScore('-5');
+                        objectScore.setX(cans[i].x + cans[i].getWidth()/3);
+                    }else {
+                        objectScore.setScore('X');
+                        objectScore.setX(cans[i].x + cans[i].getWidth()/2.5);
+                    }
+                    if(score < 0){
+                        score = 0;
+                    }
                 }
 
                 switch(trashes[heldTrash].getType()){
@@ -362,8 +395,7 @@ function mouseReleased(){
                 trashes.splice(heldTrash,1);
                     
                 scores.push(objectScore);
-                    
-                console.log('entrou if check inside');
+
                 break;
             } 
             if(i == 4) {
@@ -371,23 +403,16 @@ function mouseReleased(){
                     trashes[heldTrash].setX(initialX);
                     trashes[heldTrash].setY(initialY);
                     trashes[heldTrash].setHeld(false);  
-                    console.log('entrou else 1');
                 } 
                 else {
                     trashes[heldTrash].setHeld(false);
-                    console.log('entrou else 2');
                 }
             }
         }
         heldTrash = null;
     }
-//    for(let trash of trashes){
-//        trash.setHeld(false); 
-//    }
-    //document.getElementsByTagName('canvas')[0].style.cursor = "url('_images/hand-cursor-open.cur'), auto";
     cursor('_images/hand-cursor-open.cur');
 }
-////fim possível otimização/////
 
 
 function mouseDragged(){
@@ -395,16 +420,10 @@ function mouseDragged(){
         if(trash.getHeld() && initialTimer == 0){
             trash.move();
         }
-    }
-//    trashes[heldTrash].move();   
-}
-
-function tryAgain(){
-    //window.location.reload();
+    } 
 }
 
 function restart(){
-    score = 0;
     music.stop();
     timerOn = false;
     trashes = [];
@@ -412,6 +431,7 @@ function restart(){
     restarted = true;
     initialTimer = 3;
     timeSelect.value = 0;
+    //noLoop();
     draw();
     setup();
 }
@@ -451,7 +471,7 @@ function startGame(){
     if(timeSelect.value == 0){
         initialTimer = 0;
     }
-    console.log('music played');
+    score = 0;
 }
 
 btnTryAgain.addEventListener('click', restart);

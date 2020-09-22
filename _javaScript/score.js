@@ -51,10 +51,4 @@ class Score{
         }
     }
     
-//    move() {
-//        if(millis()-this.timeControl >= 200) {
-//            this.y -= 1;
-//        }
-//    }
-    
 }

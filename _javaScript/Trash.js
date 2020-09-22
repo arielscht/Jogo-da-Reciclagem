@@ -33,9 +33,6 @@ class Trash {
     }
     
     show(){
-//        fill(255);
-//        noStroke();
-//        rect(this.x, this.y, this.size, this.size)
         image(this.img, this.x, this.y, this.size, this.size);
     }
     

@@ -23,8 +23,6 @@ class Can{
     
     
     show(){
-//        fill(this.color);
-//        rect(this.x, this.y, this.height, this.width);
         image(this.img, this.x, this.y, this.width, this.height);
     }
     

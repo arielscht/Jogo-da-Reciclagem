@@ -3,47 +3,47 @@ Released: 15/03/2019
 
 -Lixeiras com imagens;
 -Scoreboard com os elementos posicionados;
--Lixos móveis sem imagem;
+-Lixos mï¿½veis sem imagem;
 
 version 1.0.1 
 Released: 17/03/2019
 
--Sistema de array para carregar as imagens dos lixos está
+-Sistema de array para carregar as imagens dos lixos estï¿½
 funcionando;
 
-version 1.0.2 - ATUAL
+version 1.0.2
 Released: 24/03/2019
 
--Sistema de tamanho único para cada categoria de lixo;
--Posicionamento aleatório corrigido, nenhum lixo 'nasce' com alguma parte para fora da tela;
--Consertada a movimentação dos lixos, não sendo mais possível mover o lixo para fora do mapa;
--Sistema de colocar o lixo na lixeira está funcionando, porém sem nenhuma restrição, pode-se colocar em qualquer lixeira;
+-Sistema de tamanho ï¿½nico para cada categoria de lixo;
+-Posicionamento aleatï¿½rio corrigido, nenhum lixo 'nasce' com alguma parte para fora da tela;
+-Consertada a movimentaï¿½ï¿½o dos lixos, nï¿½o sendo mais possï¿½vel mover o lixo para fora do mapa;
+-Sistema de colocar o lixo na lixeira estï¿½ funcionando, porï¿½m sem nenhuma restriï¿½ï¿½o, pode-se colocar em qualquer lixeira;
 
 version 1.0.3
 Released: 30/05/2019
 
-- Lixos e lixeiras estão recebendo tipos numéricos correspondentes;
+- Lixos e lixeiras estï¿½o recebendo tipos numï¿½ricos correspondentes;
 - Cada lixo colocado na lixeira correta, recebe 10 pontos;
 - Cada lixo colocado na liceira incorreta, perde-se 5 pontos;
-- O lixo não se move para cima do placar;
-- Ao soltar o lixo no céu ele retorna a sua posição inicial, ao soltar no chão ele continua na posição em que foi solto;
+- O lixo nï¿½o se move para cima do placar;
+- Ao soltar o lixo no cï¿½u ele retorna a sua posiï¿½ï¿½o inicial, ao soltar no chï¿½o ele continua na posiï¿½ï¿½o em que foi solto;
 - Implementado um Timer;
 - Ao iniciar o jogo, um modal abre perguntado o tempo para o jogo, podendo selecionar o modo de treino sem tempo;
-- Ao acabar o tempo, um modal abre, o qual mostra a sua pontuação, podendo optar por sair do jogo ou jogar novamente;
-- Cursor do mouse é uma mãozinha.
+- Ao acabar o tempo, um modal abre, o qual mostra a sua pontuaï¿½ï¿½o, podendo optar por sair do jogo ou jogar novamente;
+- Cursor do mouse ï¿½ uma mï¿½ozinha.
 
 version 1.0.4
 Released: 19/06/2019
 
-CONCLUÍDO:
+CONCLUï¿½DO:
 
-- O ponto de referência do lixo deixou de ser o canto superior esquerdo e passou a ser o seu centro;
-- Timer de 3 segundos para preparar-se para o início do jogo;
-- Timer de preparação não ativa no modo de treino;
-- Os objetos agora apenas movem-se após o termino do timer de preparação;
-- Pontuação recebida flutua de trás da lixeira ao colocar um lixo dentro dela;
-- Novo sistema de reiniciar o jogo, não atualiza mais a página, para não precisar carregar os arquivos novamente;
-- Adicionada música de fundo e efeito para cada tipo de lixo caindo na lixeira;
+- O ponto de referï¿½ncia do lixo deixou de ser o canto superior esquerdo e passou a ser o seu centro;
+- Timer de 3 segundos para preparar-se para o inï¿½cio do jogo;
+- Timer de preparaï¿½ï¿½o nï¿½o ativa no modo de treino;
+- Os objetos agora apenas movem-se apï¿½s o termino do timer de preparaï¿½ï¿½o;
+- Pontuaï¿½ï¿½o recebida flutua de trï¿½s da lixeira ao colocar um lixo dentro dela;
+- Novo sistema de reiniciar o jogo, nï¿½o atualiza mais a pï¿½gina, para nï¿½o precisar carregar os arquivos novamente;
+- Adicionada mï¿½sica de fundo e efeito para cada tipo de lixo caindo na lixeira;
 - Adicionado som de 'buzina de erro' caso coloque o lixo no local errado e um som para sinalizar game over quando acaba o tempo;
 
 
