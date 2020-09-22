@@ -15,6 +15,8 @@ Ao iniciar o jogo, o objetivo é colocar os lixos espalhados pelo chão em suas 
 
 ![game gif](https://user-images.githubusercontent.com/48089807/93935113-84e75c80-fcfa-11ea-8bda-bada2bef51db.gif)
 
+O jogo pode ser acessado através da URL: http://recyclinggame.pe.hu/
+
 ###### English
 
 # Recycling Game
@@ -32,3 +34,5 @@ When the game is loaded, a modal will be open so you can choose the duration tim
 With the game started, the goal is to correctly put the trashes in their corresponding trash cans.
 
 ![game gif](https://user-images.githubusercontent.com/48089807/93935113-84e75c80-fcfa-11ea-8bda-bada2bef51db.gif)
+
+You can access the game with the following URL: http://recyclinggame.pe.hu/
