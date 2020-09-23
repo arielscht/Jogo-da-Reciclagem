@@ -1,21 +1,3 @@
-###### Português
-# Jogo da Reciclagem
-
-Jogo desenvolvido para projeto de TCC do curso técnico em informática no Instituto Federal Catarinense.
-
-### Tela Inicial
-
-Assim que o jogo é aberto, aparece um modal para escolher a dificuldade, que consiste em alterar a duração da rodada.
-
-![Initial screen](https://user-images.githubusercontent.com/48089807/93931630-70549580-fcf5-11ea-877f-a603dec780e2.jpg)
-
-### Jogo
-
-Ao iniciar o jogo, o objetivo é colocar os lixos espalhados pelo chão em suas lixeiras correspondentes
-
-![game gif](https://user-images.githubusercontent.com/48089807/93935113-84e75c80-fcfa-11ea-8bda-bada2bef51db.gif)
-
-O jogo pode ser acessado através da URL: http://recyclinggame.pe.hu/
 
 ###### English
 
@@ -36,3 +18,22 @@ With the game started, the goal is to correctly put the trashes in their corresp
 ![game gif](https://user-images.githubusercontent.com/48089807/93935113-84e75c80-fcfa-11ea-8bda-bada2bef51db.gif)
 
 You can access the game with the following URL: http://recyclinggame.pe.hu/
+
+###### Português
+# Jogo da Reciclagem
+
+Jogo desenvolvido para projeto de TCC do curso técnico em informática no Instituto Federal Catarinense.
+
+### Tela Inicial
+
+Assim que o jogo é aberto, aparece um modal para escolher a dificuldade, que consiste em alterar a duração da rodada.
+
+![Initial screen](https://user-images.githubusercontent.com/48089807/93931630-70549580-fcf5-11ea-877f-a603dec780e2.jpg)
+
+### Jogo
+
+Ao iniciar o jogo, o objetivo é colocar os lixos espalhados pelo chão em suas lixeiras correspondentes
+
+![game gif](https://user-images.githubusercontent.com/48089807/93935113-84e75c80-fcfa-11ea-8bda-bada2bef51db.gif)
+
+O jogo pode ser acessado através da URL: http://recyclinggame.pe.hu/
