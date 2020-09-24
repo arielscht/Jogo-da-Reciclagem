@@ -3,7 +3,7 @@
 
 # Recycling Game
  
-Game developed as a project for my final paper of IT at Federal Institute Catarinense.
+Game developed in 2019 as a project for my final paper of IT at Federal Institute Catarinense.
 
 ### Initial Page
 
@@ -22,7 +22,7 @@ You can access the game with the following URL: http://recyclinggame.pe.hu/
 ###### Português
 # Jogo da Reciclagem
 
-Jogo desenvolvido para projeto de TCC do curso técnico em informática no Instituto Federal Catarinense.
+Jogo desenvolvido em 2019 para projeto de TCC do curso técnico em informática no Instituto Federal Catarinense.
 
 ### Tela Inicial
 
